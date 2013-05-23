@@ -45,6 +45,8 @@ class list {
       node   *next;
       node   *prev;
       T      value;
+      node (const T& val, node* const next = nullptr, 
+        node* const prev = nullptr) : value(val), next(next), prev(prev) {}
     };
 
     node   *first; // The pointer to the first node
@@ -98,9 +100,8 @@ bool list<T>::isEmpty() const{
 
 template <typename T>
 void list<T>::insertFront(const T &val) {
+  node *newNode = new node(val);
   length++;
-  node *newNode = new node;
-  new (&(newNode->value)) T(val);
   newNode->next = first;
   newNode->prev = nullptr;
   if (isEmpty()) first = last = newNode;
@@ -112,9 +113,8 @@ void list<T>::insertFront(const T &val) {
 
 template <typename T>
 void list<T>::insertBack(const T &val) {
+  node *newNode = new node(val);
   length++;
-  node *newNode = new node;
-  new (&(newNode->value)) T(val);
   newNode->next = nullptr;
   newNode->prev = last;
   if (isEmpty()) first = last = newNode;
@@ -159,9 +159,7 @@ void list<T>::removeBack() {
 }
 
 template <typename T>
-list<T>::list() {
-  createEmpty();
-}
+list<T>::list() : first(nullptr), last(nullptr), length(0) {}
 
 template <typename T>
 list<T>::list(const list &l) {
