@@ -38,11 +38,11 @@ T convertToNum (string const &test) {
 
 // Calculates the length of C-style string
 int strlen (char *str) {
-    int length = 0;
-    while (*str++ != '\0') {
-        length++;
+    int len;
+    for (len = 0; *str != '\0'; str++) {
+        len++;
     }
-    return length;
+    return len;
 }
 
 // Reverses a C-style string in place
